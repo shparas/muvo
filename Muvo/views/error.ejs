@@ -1,9 +1,0 @@
-﻿<%- include('components/head-default', {title: helpers.safe(title)}); %>
-
-<div>
-  <h1> <% helpers.safe(message) %> </h1>
-  <h2> <% helpers.safe(error.status) %> </h1>
-  <pre> <% helpers.safe(error.stack) %> </pre>
-</div>
-
-<%- include('components/tail-default', {}); %>

@@ -1,1 +1,1 @@
-exports.safe = (value) => (typeof(value) != "undefined") ? value : 'Undefined';
+exports.safe = (value) => (typeof(value) != "undefined") ? value : 'undefined';
