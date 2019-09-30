@@ -31,18 +31,20 @@ var errorController = require(controllerDir + 'error');
 var middlewareDir = './1.3-middlewares/';
 var isAuth = require(middlewareDir + 'is-auth');
 
-
-// constants to be used
-const MONGODB_URI = "mongodb+srv://dbadmin:2aanR0Hta8nycE5C@maincluster-tcbpf.mongodb.net/test?retryWrites=true&w=majority";
-
-
 // BEGIN //
-
-// few setup
 var app = express();
+
+// DB Settings
+// Run this in MongoCLI: use Movo; db.createUser({ user: "dbadmin", pwd: "2aanR0Hta8nycE5C", roles: [{ role: "readWrite", db: "Muvo" }] })
+const MONGODB_URI = process.env.MONGODB_URI ||
+    (app.get('env') === 'development') ?
+    'mongodb://dbadmin:2aanR0Hta8nycE5C@127.0.0.1:27017/Muvo' :
+    'mongodb+srv://dbadmin:2aanR0Hta8nycE5C@maincluster-tcbpf.mongodb.net/test?retryWrites=true&w=majority';
+
+// session storage setup
 var store = new MongoDBStore({
-  uri: MONGODB_URI,
-  collection: 'sessions'
+    uri: MONGODB_URI,
+    collection: 'sessions'
 });
 
 //var csrfProtection = csrf();
@@ -65,12 +67,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // session
 app.use(
-  session({
-    secret: 'a98zs9vJK8rDpi',
-    resave: false,
-    saveUninitialized: false,
-    store: store
-  })
+    session({
+        secret: 'a98zs9vJK8rDpi',
+        resave: false,
+        saveUninitialized: false,
+        store: store
+    })
 );
 
 // flash session messages
@@ -78,8 +80,8 @@ app.use(flash());
 
 // authentication local var
 app.use((req, res, next) => {
-  res.locals.isAuthenticated = req.session.isLoggedIn;
-  next();
+    res.locals.isAuthenticated = req.session.isLoggedIn;
+    next();
 });
 
 // ERRORS
@@ -92,33 +94,33 @@ app.use(function (req, res, next) {
 
 // Dev error handler (print stacktrace)
 if (app.get('env') === 'development') {
-	app.use(function (err, req, res, next) {
-		res.status(err.status || 500);
-		res.render('error', {
-			message: err.message,
-			error: err
-		});
-	});
+    app.use(function (err, req, res, next) {
+        res.status(err.status || 500);
+        res.render('error', {
+            message: err.message,
+            error: err
+        });
+    });
 }
 
 // Production error handler (no stacktraces leaked to user)
 app.use(function (err, req, res, next) {
-	res.status(err.status || 500);
-	res.render('error', {
-		message: err.message,
-		error: {}
-	});
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
 });
 
 app.set('port', process.env.PORT || 3000);
 
 mongoose
-  .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(result => {
-    app.listen(app.get('port'), function () {
-			debug('Express server listening on port ' + app.get('port'));
-		});
-  })
-  .catch(err => {
-    console.log(err);
-  });
+    .connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(result => {
+        app.listen(app.get('port'), function () {
+            debug('Express server listening on port ' + app.get('port'));
+        });
+    })
+    .catch(err => {
+        console.log(err);
+    });
