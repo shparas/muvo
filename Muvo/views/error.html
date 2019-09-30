@@ -1,0 +1,24 @@
+<%- include("components/head-complete.html", {title: "Error"}); %>
+	<div class="container">
+		<div class="row">
+			<div class="col d-cell align-middle  text-center">
+				<div class="mb-5">
+					<div class="mb-5 h-100">
+						 <a href="/"><img src="/images/exit.png" class="img-fluid h-100" width="100px"></a>
+					</div>
+				</div>
+				<div class="my-5">&nbsp;</div>
+				<div class="my-5 d-none d-md-block">&nbsp;</div>
+				<h1 class="my-5">== !(EXPECTED)</h1>
+				<div class="my-5 d-none d-md-block">&nbsp;</div>
+				<h4>Nothing much going on here.</h4>
+				<h4>See you somewhere else?</h4>
+			</div>
+			<div>
+				<h1> <% helpers.safe(message) %> </h1>
+				<h2> <% helpers.safe(error.status) %> </h1>
+				<pre> <% helpers.safe(error.stack) %> </pre>
+			</div>
+		</div>
+	</div>
+<%- include("components/tail-complete.html"); %>

@@ -1,0 +1,65 @@
+<div>
+	<h3 class="my-2 text-center mx-auto">New Tasks</h3>
+	<div class="view-tasks">
+		<div class="tasks">
+			<div class="view-task-post-date">
+				Sept 29 2019
+			</div>
+			<div class="view-task-description">
+				This is the desc, will pay 25 an hour
+			</div>
+			<div class="view-task-tags">
+				From and To address information
+			</div>
+			<div class="view-task-difficulty">
+				very little
+			</div>
+			<div class="view-task-skills">
+				skills required
+			</div>
+			<div class="view-task-time-required">
+				2 hours
+			</div>
+			<div class="view-task-attachments">
+				attachments
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>		
+
+function getNewTasks(){
+	$.ajax({
+		type: "GET",
+		url: "/new_tasks?from=0&to=10&radius=100",
+		success: function(response){
+			var respObj = JSON.parse(response);
+			var elem = document.getElementsByClassName("view-tasks")[0];
+			elem.innerHTML = "";
+			for (var i = 0; i < respObj.length; i++){
+				elem.innerHTML += '<div class="task-object">' + JSON.stringify(respObj[i]) + "</div>";
+			}
+		}
+	});
+}
+getNewTasks();
+</script>

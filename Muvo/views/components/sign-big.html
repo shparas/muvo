@@ -1,0 +1,22 @@
+<div>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a aria-controls="nav-home" aria-selected="true" class="nav-item nav-link active" data-toggle="tab" href="#register" id="nav-home-tab" role="tab">Register</a> <a aria-controls="nav-profile" aria-selected="false" class="nav-item nav-link" data-toggle="tab" href="#login" id="nav-profile-tab" role="tab">Login</a>
+  </div>
+  <div class="tab-content">
+    <div class="tab-pane fade-in active" id="register">
+      <h3 class="my-2 text-center mx-auto">Lets set you up an account!</h3>
+      <form action="/process_login" method="post">
+        <input class="form-control px-2 my-2 mt-0" name="fname" placeholder="First Name" required="" type="text"> <input class="form-control px-2 my-2 mt-0" name="lname" placeholder="Last Name" required="" type="text"> <input class="form-control px-2 my-2 mt-0" name="zip" placeholder="Zip Code" required="" type="number"> <input class="form-control px-2 my-2 mt-0" name="phone" placeholder="Phone (xxx-xxx-xxxx)" required="" type="text"> <input class="form-control px-2 my-2 mt-0" name="email" placeholder="Email" required="" type="email"> <input class="form-control px-2 my-2" name="pass" placeholder="Password" required="" type="password"> <input class="btn btn-primary btn px-4 my-2 mb-0" name="action" type="submit" value="Register">
+      </form>
+    </div>
+    <div class="tab-pane fade" id="login">
+      <h3 class="my-2 text-center mx-auto">Lets get you signed in!</h3>
+      <form action="/process_login" method="post">
+        <input class="form-control px-2 my-2 mt-0" name="email" placeholder="Email" required="" type="email"> <input class="form-control px-2 my-2" name="pass" placeholder="Password" required="" type="password">
+        <div class="checkbox px-2 my-2">
+          <label><input name="remember" type="checkbox" value="1"> Remember</label>
+        </div><input class="btn btn-primary btn px-4 my-2 mb-0" name="action" type="submit" value="Sign In">
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,211 @@
+<div>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a aria-controls="nav-home" aria-selected="true" class="nav-item nav-link active" data-toggle="tab" href="#add-new" id="nav-home-tab" role="tab">Add new</a> <a aria-controls="nav-profile" aria-selected="false" class="nav-item nav-link" data-toggle="tab" href="#my-task-history" id="nav-profile-tab" role="tab">History</a>
+  </div>
+  <div class="tab-content">
+    <div class="tab-pane fade-in active" id="add-new">
+      <h3 class="my-2 text-center mx-auto">Lets add a new task!</h3>
+			
+			<form id="new-task-form" action="/add" method="post">
+				<textarea name="taskDescription" class="form-control px-2 my-2 mt-0" form="new-task-form" rows="5" placeholder="Brief Description" required></textarea>
+				<div class="row px-2 my-2 mt-0">
+					<div class="col-4 py-2">
+						Tags:
+					</div>
+					<div class="col-8">
+						<div class="input-group">
+								<input type="text" name="taskTag" class="form-control" id="add-tag-input" placeholder="Tag">
+								<button class="btn-small btn-primary rounded-right" onclick="addTag(); return false;">Add</button>
+						</div>
+						<div class="task-tags-container px-2 my-2 mt-0"></div>
+					</div>
+				</div>
+				<div class="row px-2 my-2 mt-0">
+					<div class="col-4">
+						Difficulty:
+					</div>
+					<div class="col-8">
+						<input type="range" class="custom-range" name="taskDifficulty" min="1" max="3" step="1">
+						<div class="row text-muted h6">
+							<div class="col-4 text-left">Easy</div>
+							<div class="col-4 text-center">A Little</div>
+							<div class="col-4 text-right">Hard</div>
+						</div>
+					</div>
+				</div>
+				<div class="row px-2 my-2 mt-0">
+					<div class="col-4">
+						Special Skills:
+					</div>
+					<div class="col-8">
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" id="customRadioInline1" name="taskSkill" value="1" class="custom-control-input">
+							<label class="custom-control-label" for="customRadioInline1">Required</label>
+						</div>
+						<div class="custom-control custom-radio custom-control-inline">
+							<input type="radio" id="customRadioInline2" name="taskSkill" value="0" class="custom-control-input" checked>
+							<label class="custom-control-label" for="customRadioInline2">Not Required</label>
+						</div>
+					</div>
+				</div>
+				<div class="row px-2 my-2 mt-0">
+					<div class="col-4 py-2">
+						Time Required:
+					</div>
+					<div class="col-8">
+						<div class="input-group">
+							<input type="number" name="taskTimeNumber" class="form-control" placeholder=" # " required>
+							<select class="custom-select mr-sm-2" name="taskTimeUnit">
+								<option value="1">Minutes</option>
+								<option value="2">Hours</option>
+								<option value="3">Days</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="custom-file">
+					<input type="file" class="custom-file-input" id="validatedCustomFile" name="taskAttachment" onchange="fileInputChange(); return false;">
+					<label class="custom-file-label task-attachment-label" for="validatedCustomFile">Attachments (if available)</label>
+				</div>
+				<input name="tags" type="hidden" value="" id="all-tags-hidden">
+				<input class="btn btn-primary btn px-4 mt-2" name="action" type="submit" value="Post" onclick="return post();">
+      </form>
+    </div>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+    <div class="tab-pane fade" id="my-task-history">
+      <h3 class="my-2 text-center mx-auto">Tasks you had put up before</h3>
+      <div class="view-tasks">
+				<div class="tasks">
+					<div class="view-task-post-date">
+						dec 15 2018
+					</div>
+					<div class="view-task-description">
+						Man I hate this
+					</div>
+					<div class="view-task-tags">
+						tags1 tags2
+					</div>
+					<div class="view-task-difficulty">
+						very little
+					</div>
+					<div class="view-task-skills">
+						skills required
+					</div>
+					<div class="view-task-time-required">
+						2 hours
+					</div>
+					<div class="view-task-attachments">
+						attachments
+					</div>
+				</div>
+			</div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+function post(){
+	var taskTags = document.getElementsByClassName("task-tags");
+	var allTags = new Set();
+	for (var i=0; i < taskTags.length; i++)
+		allTags.add(taskTags[i].innerHTML);
+		
+	var tags = JSON.stringify(Array.from(allTags));
+	console.log(tags);
+	document.getElementById("all-tags-hidden").value = tags;
+	
+	var newTaskData = $('#new-task-form').serialize();
+	
+	$.ajax({
+		type: "POST",
+		url: "/add",
+		data: newTaskData,
+		success: function(){
+			console.log("posted!");
+		}
+	});
+	
+	return false;
+}			
+function addTag(){
+	var taskTags = document.getElementsByClassName("task-tags");
+	var allTags = new Set();
+	for (var i=0; i < taskTags.length; i++)
+		allTags.add(taskTags[i].innerHTML);
+	
+	var addTagInput = document.getElementById("add-tag-input");
+	allTags.add(addTagInput.value);
+	addTagInput.value = "";
+	
+	var container = document.getElementsByClassName("task-tags-container")[0];
+	while (container.firstChild)
+		container.removeChild(container.firstChild);
+	
+	allTags.forEach((tag) => {
+		var child = document.createElement("span");
+		child.className = "task-tags bg-info text-white rounded p-1 px-2 m-1";
+		child.addEventListener("click", function(){this.remove();});
+		child.innerHTML = tag;
+		container.appendChild(child);
+	});
+}
+function fileInputChange(){
+	$("input[name='taskAttachment']").each(function() {
+			var fileName = $(this).val().split('/').pop().split('\\').pop();
+			var label = "Attachments (if available)";
+			if (fileName !== "")
+				label = fileName;
+			$(".task-attachment-label").html(label);
+	});
+}
+ 
+function getHistory(){
+	$.ajax({
+		type: "GET",
+		url: "/my_tasks?from=0&to=0",
+		success: function(response){
+			var respObj = JSON.parse(response);
+			var elem = document.getElementsByClassName("view-tasks")[0];
+			elem.innerHTML = "";
+			for (var i = 0; i < respObj.length; i++){
+				elem.innerHTML += '<div class="task-object">' + JSON.stringify(respObj[i]) + "</div>";
+			}
+		}
+	});
+}
+getHistory();
+</script>
