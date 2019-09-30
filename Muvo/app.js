@@ -24,7 +24,6 @@ var routeDir = './1.1-routes/';
 var index = require(routeDir + 'index');
 // controllers import
 var controllerDir = './1.2-controllers/';
-var errorController = require(controllerDir + 'error');
 // middlewares import
 var middlewareDir = './1.3-middlewares/';
 var isAuth = require(middlewareDir + 'is-authorized');
