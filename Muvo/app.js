@@ -21,7 +21,11 @@ var helpers = require('./utils/helpers');
 
 // routes import 
 var routeDir = './1.1-routes/';
-var index = require(routeDir + 'index');
+var main = require(routeDir + 'main');
+var auth = require(routeDir + 'auth');
+var tasks = require(routeDir + 'tasks');
+
+
 // controllers import
 var controllerDir = './1.2-controllers/';
 // middlewares import
@@ -83,11 +87,15 @@ app.use((req, res, next) => {
   next();
 });
 
+/////////////////////////////////////////////////////////////
 // use routes
-app.use(index);
+app.use(main);
+app.use(auth);
+app.use(tasks);
 
+/////////////////////////////////////////////////////////////
 
-
+/*
 // ERRORS
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -116,7 +124,7 @@ if (app.get('env') === 'development') {
 		});
 	});
 }
-
+*/
 app.set('port', process.env.PORT || 80);
 
 mongoose

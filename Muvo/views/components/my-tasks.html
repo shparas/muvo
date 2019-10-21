@@ -6,26 +6,56 @@
     <div class="tab-pane fade-in active" id="add-new">
       <h3 class="my-2 text-center mx-auto">Lets add a new Move task!</h3>
 			
-			<form id="new-task-form" action="/add" method="post">
-				<textarea name="taskDescription" class="form-control px-2 my-2 mt-0" form="new-task-form" rows="5" placeholder="Brief Description" required></textarea>
+			<form id="new-task-form" action="/tasks" method="post">
+				<textarea name="description" class="form-control px-2 my-2 mt-0" form="new-task-form" rows="5" placeholder="Brief Description" ></textarea>
 				<div class="row px-2 my-2 mt-0">
 					<div class="col-4 py-2">
-						Tags:
+						From
 					</div>
 					<div class="col-8">
-						<div class="input-group">
-								<input type="text" name="taskTag" class="form-control" id="add-tag-input" placeholder="Tag">
-								<button class="btn-small btn-primary rounded-right" onclick="addTag(); return false;">Add</button>
+						<div><input type="text" name="fromStreet" class="form-control" placeholder="Street"></div>
+						<div class="input-group">	
+							<input type="text" name="fromCity" class="form-control" placeholder="City">
+							<input type="text" name="fromState" class="form-control" placeholder="State">
+							<input type="text" name="fromZip" class="form-control" placeholder="Zip">
 						</div>
 						<div class="task-tags-container px-2 my-2 mt-0"></div>
 					</div>
 				</div>
 				<div class="row px-2 my-2 mt-0">
-					<div class="col-4">
-						Difficulty:
+					<div class="col-4 py-2">
+						To
 					</div>
 					<div class="col-8">
-						<input type="range" class="custom-range" name="taskDifficulty" min="1" max="3" step="1">
+						<div><input type="text" name="toStreet" class="form-control" placeholder="Street"></div>
+						<div class="input-group">	
+							<input type="text" name="toCity" class="form-control" placeholder="City">
+							<input type="text" name="toState" class="form-control" placeholder="State">
+							<input type="text" name="toZip" class="form-control" placeholder="Zip">
+						</div>
+						<div class="task-tags-container px-2 my-2 mt-0"></div>
+					</div>
+				</div>
+				
+				<div class="row px-2 my-2 mt-0">
+					<div class="col-4 py-2">
+						Date
+					</div>
+					<div class="col-8">
+						<div class="input-group">	
+							<input type="date" name="date" class="form-control" placeholder="Date">
+							<input type="time" name="time" class="form-control" placeholder="Time">
+						</div>
+					</div>
+				</div>
+				
+				
+				<div class="row px-2 my-2 mt-0">
+					<div class="col-4">
+						Difficulty
+					</div>
+					<div class="col-8">
+						<input type="range" class="custom-range" name="difficulty" min="1" max="3" step="1">
 						<div class="row text-muted h6">
 							<div class="col-4 text-left">Easy</div>
 							<div class="col-4 text-center">A Little</div>
@@ -35,40 +65,38 @@
 				</div>
 				<div class="row px-2 my-2 mt-0">
 					<div class="col-4">
-						Special Skills:
+						Special Skills
 					</div>
 					<div class="col-8">
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="customRadioInline1" name="taskSkill" value="1" class="custom-control-input">
+							<input type="radio" id="customRadioInline1" name="skillsRequired" value="1" class="custom-control-input">
 							<label class="custom-control-label" for="customRadioInline1">Required</label>
 						</div>
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="customRadioInline2" name="taskSkill" value="0" class="custom-control-input" checked>
+							<input type="radio" id="customRadioInline2" name="skillsRequired" value="0" class="custom-control-input" checked>
 							<label class="custom-control-label" for="customRadioInline2">Not Required</label>
 						</div>
 					</div>
 				</div>
 				<div class="row px-2 my-2 mt-0">
 					<div class="col-4 py-2">
-						Time Required:
+						Estimated Time
+					</div>
+					<div class="col-8">
+							<input type="number" name="estimatedTime" class="form-control" placeholder="Number of hours">
+					</div>
+				</div>
+				<div class="row px-2 my-2 mt-0">
+					<div class="col-4 py-2">
+						Pay
 					</div>
 					<div class="col-8">
 						<div class="input-group">
-							<input type="number" name="taskTimeNumber" class="form-control" placeholder=" # " required>
-							<select class="custom-select mr-sm-2" name="taskTimeUnit">
-								<option value="1">Minutes</option>
-								<option value="2">Hours</option>
-								<option value="3">Days</option>
-							</select>
+							<input type="number" name="pay" class="form-control" placeholder=" $/hour ">
 						</div>
 					</div>
 				</div>
-				<div class="custom-file">
-					<input type="file" class="custom-file-input" id="validatedCustomFile" name="taskAttachment" onchange="fileInputChange(); return false;">
-					<label class="custom-file-label task-attachment-label" for="validatedCustomFile">Attachments (if available)</label>
-				</div>
-				<input name="tags" type="hidden" value="" id="all-tags-hidden">
-				<input class="btn btn-primary btn px-4 mt-2" name="action" type="submit" value="Post" onclick="return post();">
+				<input class="btn btn-primary btn px-4 mt-2" name="action" type="submit" value="Post" onclick="//return post();">
       </form>
     </div>
 		
