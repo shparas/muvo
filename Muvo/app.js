@@ -39,7 +39,7 @@ var unit = require('./UNITS/units');
 // BEGIN //
 var app = express();
 
-// DB Settings
+// DB Settings, this is for developement environment only, the keys are different for production environment which can be set or obtained using process.env.MONGODB_URI
 // Run this in MongoCLI: use Movo; db.createUser({ user: "dbadmin", pwd: "2aanR0Hta8nycE5C", roles: [{ role: "readWrite", db: "Muvo" }] })
 const MONGODB_URI = process.env.MONGODB_URI ||
     (app.get('env') === 'development') ?
