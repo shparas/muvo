@@ -1,3 +1,8 @@
+// Handles routes to signup, signin, signout
+// Complete
+
+'use strict';
+
 const express = require('express');
 
 const authController = require('../1.2-controllers/auth');

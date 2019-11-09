@@ -30,23 +30,61 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="1.1-routes\auth.js" />
+    <Content Include="1.1-routes\main.js" />
+    <Content Include="1.1-routes\tasks.js" />
+    <Content Include="1.2-controllers\auth.js" />
+    <Content Include="1.2-controllers\tasks.js" />
+    <Content Include="1.3-middlewares\is-authorized.js" />
+    <Content Include="1.3-middlewares\helpers.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="2.1-models\task.js" />
+    <Content Include="2.1-models\user.js" />
     <Content Include="app.js" />
-    <Content Include="routes\index.js" />
-    <Content Include="routes\users.js" />
     <Content Include="package.json" />
-    <Content Include="public\stylesheets\main.css" />
+    <Content Include="public\favicon.png" />
+    <Content Include="public\images\exit.png" />
+    <Content Include="public\scripts\main.js" />
+    <Content Include="public\styles\main.css" />
     <Content Include="README.md" />
-    <Content Include="views\index.pug" />
-    <Content Include="views\layout.pug" />
-    <Content Include="views\error.pug" />
+    <Content Include="UNITS\temp.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="UNITS\units.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="utils\helpers.js" />
+    <Content Include="views\add.html" />
+    <Content Include="views\components\body-footer-1.html" />
+    <Content Include="views\components\body-header-1.html" />
+    <Content Include="views\components\settings.html" />
+    <Content Include="views\components\dash-tasks.html" />
+    <Content Include="views\components\head-complete.html" />
+    <Content Include="views\components\head.html" />
+    <Content Include="views\components\my-tasks.html" />
+    <Content Include="views\components\sidebar-signed.html" />
+    <Content Include="views\components\sign-big.html" />
+    <Content Include="views\components\tail-complete.html" />
+    <Content Include="views\settings.html" />
+    <Content Include="views\dash.html" />
+    <Content Include="views\error.html" />
+    <Content Include="views\home.html" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="1.1-routes\" />
+    <Folder Include="1.2-controllers\" />
+    <Folder Include="1.3-middlewares\" />
+    <Folder Include="2.1-models\" />
+    <Folder Include="2.2-data\" />
+    <Folder Include="UNITS\" />
     <Folder Include="public\" />
     <Folder Include="public\images\" />
-    <Folder Include="public\javascripts\" />
-    <Folder Include="public\stylesheets\" />
-    <Folder Include="routes\" />
+    <Folder Include="public\scripts\" />
+    <Folder Include="public\styles\" />
+    <Folder Include="utils\" />
     <Folder Include="views\" />
+    <Folder Include="views\components\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>

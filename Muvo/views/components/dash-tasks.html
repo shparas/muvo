@@ -1,31 +1,148 @@
 <div>
-	<h3 class="my-2 text-center mx-auto">New Tasks</h3>
-	<div class="view-tasks">
-		<div class="tasks">
-			<div class="view-task-post-date">
-				Sept 29 2019
-			</div>
-			<div class="view-task-description">
-				This is the desc, will pay 25 an hour
-			</div>
-			<div class="view-task-tags">
-				From and To address information
-			</div>
-			<div class="view-task-difficulty">
-				very little
-			</div>
-			<div class="view-task-skills">
-				skills required
-			</div>
-			<div class="view-task-time-required">
-				2 hours
-			</div>
-			<div class="view-task-attachments">
-				attachments
-			</div>
-		</div>
-	</div>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a aria-controls="nav-home" aria-selected="true" class="nav-item nav-link active" data-toggle="tab" href="#add-new" id="nav-home-tab" role="tab">Favorites</a>
+        <a aria-controls="nav-profile" aria-selected="false" class="nav-item nav-link" data-toggle="tab" href="#my-task-history" id="nav-profile-tab" role="tab">Community</a>
+    </div>
+    <div class="tab-content">
+        <div class="tab-pane fade-in active" id="add-new">
+            <h3 class="my-2 text-center mx-auto">Tasks your are following</h3>
+
+        </div>
+
+
+
+
+        <div class="tab-pane fade" id="my-task-history">
+            <h3 class="my-2 text-center mx-auto">All tasks around you</h3>
+            <div id="view-tasks">
+                <div class="tasks">
+                    <div class="view-task-post-date">
+                        Sept 29 2019
+                    </div>
+                    <div class="view-task-description">
+                        This is the desc, will pay 25 an hour
+                    </div>
+                    <div class="view-task-tags">
+                        From and To address information
+                    </div>
+                    <div class="view-task-difficulty">
+                        very little
+                    </div>
+                    <div class="view-task-skills">
+                        skills required
+                    </div>
+                    <div class="view-task-time-required">
+                        2 hours
+                    </div>
+                    <div class="view-task-attachments">
+                        attachments
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<div id="root"></div>
+
+
+<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+<script type="text/babel">
+    class Task extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = this.props.json;
+            this.pin = this.pin.bind(this);
+            this.offerHelp = this.offerHelp.bind(this);
+            this.pinStatus = this.pinStatus.bind(this);
+            this.offerHelpStatus = this.offerHelpStatus.bind(this);
+        }
+        pin(){
+        }
+    offerHelp(){
+    }
+        pinStatus(){
+        }
+    offerHelpStatus(){
+    }
+
+    }
+    
+    
+    
+
+    render() {
+
+
+    
+    
+    
+
+
+    return (
+        <div className="tasks">
+            <div className="view-task-post-user">
+                {this.state.user}
+            </div>
+            <div className="view-task-post-date">
+                {this.state.date}, {this.state.time}
+            </div>
+            <div className="view-task-description">
+                {this.state.description}
+            </div>
+            <div className="view-task-from">
+                {this.state.fromStreet + this.state.fromCity + this.state.fromState + this.state.fromZip}
+            </div>
+            <div className="view-task-to">
+                {this.state.toStreet + this.state.toCity + this.state.toState + this.state.toZip}
+            </div>
+            <div className="view-task-difficulty">
+                {this.state.difficulty==0?"Easy":(this.state.difficulty==1?"A little": "Hard")}
+            </div>
+            <div className="view-task-skills">
+                {this.state.skillsRequired == 0?"No":"Yes"}
+            </div>
+            <div className="view-task-time-required">
+                {this.state.estimatedTime}
+            </div>
+            <div className="view-task-pay">
+                {this.state.pay}
+            </div>
+        </div>
+    );
+    }
+    }
+
+
+    async function getData(url = '/tasks?shps2@live.com', data = {}) {
+    // Default options are marked with *
+    const response = await fetch(url, {
+    method: 'GET', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+    'Content-Type': 'application/json'
+    // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrer: 'no-referrer', // no-referrer, *client
+    // body: JSON.stringify(data) // body data type must match "Content-Type" header
+    });
+    return await response.json(); // parses JSON response into native JavaScript objects
+    }
+
+    getData().then((data) => {
+    ReactDOM.render(
+    <Task json={data[0]} />, document.getElementById('root')
+    );
+    });
+
+
+
+</script>
 
 
 
@@ -45,21 +162,6 @@
 
 
 
-<script>		
+<script>
 
-function getNewTasks(){
-	$.ajax({
-		type: "GET",
-		url: "/new_tasks?from=0&to=10&radius=100",
-		success: function(response){
-			var respObj = JSON.parse(response);
-			var elem = document.getElementsByClassName("view-tasks")[0];
-			elem.innerHTML = "";
-			for (var i = 0; i < respObj.length; i++){
-				elem.innerHTML += '<div class="task-object">' + JSON.stringify(respObj[i]) + "</div>";
-			}
-		}
-	});
-}
-getNewTasks();
 </script>

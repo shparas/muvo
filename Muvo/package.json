@@ -6,6 +6,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app",
     "dev": "./node_modules/.bin/nodemon app.js",
+		
+		"prod": "set NODE_ENV=production & cls & node app & set NODE_ENV=",
+		"prod-ps": "$env:NODE_ENV=production; node app; $env:NODE_ENV=development;",
+
     "flow": "flow",
     "build": "babel src/ -d lib/",
     "prepublish": "npm run build"

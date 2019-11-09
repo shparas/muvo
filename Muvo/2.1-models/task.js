@@ -77,7 +77,9 @@ const userSchema = new Schema({
 	status: {
 		type: Number,	// 1 = created, 2 = on work, 3 = complete
 		default: 1
-	}
+    },
+    pinned: [String],
+    offered: [String]
 });
 
 module.exports = mongoose.model('Task', userSchema);
