@@ -43,35 +43,33 @@
                 </h5>
                 <div className="card-body">
                     <div className="view-task-description">
-                        {this.state.description}
+                        Description: {this.state.description}
                     </div>
                     <div className="view-task-from">
-                        {this.state.fromStreet + this.state.fromCity + this.state.fromState + this.state.fromZip}
+                        From Address: {this.state.fromStreet}, {this.state.fromCity}, {this.state.fromState} {this.state.fromZip}
                     </div>
                     <div className="view-task-to">
-                        {this.state.toStreet + this.state.toCity + this.state.toState + this.state.toZip}
+                        To Address: {this.state.toStreet}, {this.state.toCity}, {this.state.toState} {this.state.toZip}
                     </div>
                     <div className="view-task-difficulty">
-                        {this.state.difficulty == 0 ? "Easy" : (this.state.difficulty == 1 ? "A little" : "Hard")}
+                        Difficulty: {this.state.difficulty == 0 ? "Easy" : (this.state.difficulty == 1 ? "A little" : "Hard")}
                     </div>
                     <div className="view-task-skills">
-                        {this.state.skillsRequired == 0 ? "No" : "Yes"}
+                        Special Skills Required: {this.state.skillsRequired == 0 ? "No" : "Yes"}
                     </div>
                     <div className="view-task-time-required">
-                        {this.state.estimatedTime}
+                        Estimated Time: {this.state.estimatedTime}
                     </div>
                     <div className="view-task-pay">
-                        {this.state.pay}
+                        Pay rate: {this.state.pay}
                     </div>
                 </div>
                 <div className="card-footer bg-light">
                     <div>
-                        Favorited by:
-                        {this.state.favorites.map(item => <span key={item}>{item}</span>)}
+                        Favorited by: {this.state.favorites.map(item => <span key={item}>{item}, </span>)}
                     </div>
                     <div>
-                        Requested by:
-                        {(this.state.requests) && (this.state.requests.map(item => <span key={item}>{item}</span>))}
+                        Requested by: {(this.state.requests) && (this.state.requests.map(item => <span key={item}>{item}, </span>))}
                     </div>    
                 </div>
                 <div className="card-footer">

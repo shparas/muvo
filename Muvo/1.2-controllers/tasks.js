@@ -24,10 +24,10 @@ exports.addTask = (req, res) => {
     });
 
     return task.save().then(result => {
-        res.json({ "status": 200, "error": "", "response": null });
-        res.end();
+        res.redirect('/dash');
+        // res.json({ "status": 200, "error": "", "response": null });
+        // res.end();
     });
-    console.log("hello");
 }
 
 // PUT /tasks?id=_id => _id of current logged in user modified
@@ -164,6 +164,7 @@ exports.getTasks = (req, res) => {
             });
             console.log(data);
             res.setHeader('Content-Type', 'application/json');
+            data.reverse();
             return res.send(JSON.stringify(data));
         }
     );

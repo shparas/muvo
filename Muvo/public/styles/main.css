@@ -60,7 +60,7 @@ body{
 	padding:5px;
 	color:white;
 	text-align:right;
-	position:absolute;
+	position:sticky;
 	bottom:0;
 	right:0;
 }
