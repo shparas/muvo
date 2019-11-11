@@ -18,7 +18,7 @@ router.put(
     '/tasks',
     isAuthorized,
     bodyParser.json(),
-	tasks.updateTask
+    tasks.updateTask
 );
 router.get(
 	'/tasks',
@@ -30,4 +30,25 @@ router.delete(
     isAuthorized,
     tasks.removeTask
 );
+
+
+
+
+router.put(
+    '/favorite',
+    isAuthorized,
+    bodyParser.json(),
+    tasks.favorite
+);
+router.put(
+    '/requestHelp',
+    isAuthorized,
+    bodyParser.json(),
+    tasks.requestHelp
+);
+
+
+
+
+
 module.exports = router;

@@ -18,7 +18,24 @@ function run1() {
 
 
 /*
-
+async function putData(body) {
+    var url = '/requestHelp?id=5db5f8149be1d778f48696fd&stat=true';
+    // Default options are marked with *
+    var response = await fetch(url, {
+        method: 'PUT',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
+        headers: {
+            'Content-Type': 'application/json'
+            //'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrer: 'no-referrer'
+    });
+    return await response.json(); // parses JSON response into native JavaScript objects
+}
+putData("");
 
 async function getData(url = '/tasks?shps2@live.com', data = {}) {
     // Default options are marked with *

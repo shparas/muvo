@@ -45,6 +45,10 @@
     <Content Include="package.json" />
     <Content Include="public\favicon.png" />
     <Content Include="public\images\exit.png" />
+    <Content Include="public\scripts\dash-task-getter-mine.jsx" />
+    <Content Include="public\scripts\dash-task-getter.jsx">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="public\scripts\main.js" />
     <Content Include="public\styles\main.css" />
     <Content Include="README.md" />

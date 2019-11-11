@@ -67,6 +67,54 @@ exports.updateTask = (req, res) => {
     }
 }
 
+exports.favorite = (req, res) => {
+    var id = req.query.id;
+    var stat = parseInt(req.query.stat);
+
+    if (id && req.session && req.session.email) {
+        var query = { $addToSet: { favorites: req.session.email } };
+        if (stat == 0) {
+            query = { $pull: { favorites: req.session.email } };
+        }
+        Task.updateOne({ _id: id }, query, (error, data) => {
+            console.log(data);
+            if (data && data.nModified > 0) {
+                res.json({ "status": 200, "error": "", "response": null });
+            } else {
+                res.json({ "status": 404, "error": "Resource not found", "response": null });
+            }
+            res.end();
+        });
+    };
+}
+exports.requestHelp = (req, res) => {
+    var id = req.query.id;
+    var stat = parseInt(req.query.stat);
+
+    if (id && req.session && req.session.email) {
+        var query = { $addToSet: { requests: req.session.email, favorites: req.session.email } };
+        if (stat == 0) {
+            query = { $pull: { requests: req.session.email } };
+        }
+        Task.updateOne({ _id: id }, query, (error, data) => {
+            console.log(data);
+            if (data && data.nModified > 0) {
+                res.json({ "status": 200, "error": "", "response": null });
+            } else {
+                res.json({ "status": 404, "error": "Resource not found", "response": null });
+            }
+            res.end();
+        });
+    };
+
+}
+
+
+
+
+
+
+
 // DELETE /tasks?id=_id => _id is task id of logged in user
 exports.removeTask = (req, res) => {
     var id = req.query.id;
@@ -89,16 +137,34 @@ exports.removeTask = (req, res) => {
 exports.getTasks = (req, res) => {
     query = {};
     if (req.query.user) {
+        if (req.query.user == "loggedIn") {
+            req.query.user = req.session.email;
+        }
         query = { user: req.query.user };
     } else {
         query = {
             user: { $ne: req.session.email }
         };
     }
-    Task.find(query,
+    Task.find(query).lean().exec(
         function (err, data) {
-            console.log("Sending Data: ", data);
+            data.map(item => {
+                if (req.query.user != req.session.email) {
+                    item.isFavorite = false;
+                    item.hasRequested = false;
+                    if (item.favorites && req.session.email && item.favorites.indexOf(req.session.email) > -1) {
+                        item.isFavorite = true;
+                    }
+                    if (item.requests && req.session.email && item.requests.indexOf(req.session.email) > -1) {
+                        item.hasRequested = true;
+                    }
+                    delete item.favorites;
+                    delete item.requests;
+                }
+            });
+            console.log(data);
             res.setHeader('Content-Type', 'application/json');
-            return res.send(data);
-        });
+            return res.send(JSON.stringify(data));
+        }
+    );
 }

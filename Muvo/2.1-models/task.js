@@ -23,10 +23,10 @@ const userSchema = new Schema({
 		type: String,
 		required: true
 	},
-  fromState: {
-    type: String,
-    required: true
-  },
+    fromState: {
+        type: String,
+        required: true
+     },
 	fromZip: {
 		type: Number,
 		required: true
@@ -78,8 +78,13 @@ const userSchema = new Schema({
 		type: Number,	// 1 = created, 2 = on work, 3 = complete
 		default: 1
     },
-    pinned: [String],
-    offered: [String]
+    favorites: [String],
+    requests: [String]
 });
+
+
+// userSchema.set('toObject', { virtuals: true });    // add this
+// userSchema.set('toJSON', { virtuals: true });      // add this
+
 
 module.exports = mongoose.model('Task', userSchema);
