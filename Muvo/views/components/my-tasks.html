@@ -1,74 +1,54 @@
 <div>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a aria-controls="nav-home" aria-selected="true" class="nav-item nav-link active" data-toggle="tab" href="#add-new" id="nav-home-tab" role="tab">Add new</a> 
+        <a aria-controls="nav-home" aria-selected="true" class="nav-item nav-link active" data-toggle="tab" href="#add-new" id="nav-home-tab" role="tab">Add new</a>
         <a aria-controls="nav-profile" aria-selected="false" class="nav-item nav-link" data-toggle="tab" href="#my-task-history" id="nav-profile-tab" role="tab" onclick="viewAll();">History</a>
     </div>
     <div class="tab-content">
         <div class="tab-pane fade-in active" id="add-new">
-            <h3 class="my-2 text-center mx-auto">Lets add a new Move task!</h3>
-
+            <h4 class="my-2 text-center mx-auto">Lets begin the move:</h4>
             <form id="new-task-form" action="/tasks" method="post">
-                <textarea name="description" class="form-control px-2 my-2 mt-0" form="new-task-form" rows="5" placeholder="Brief Description"></textarea>
-                <div class="row px-2 my-2 mt-0">
-                    <div class="col-4 py-2">
-                        From
+                <div class="form-group">
+                    <label>Brief Description:</label>
+                    <textarea name="description" class="form-control" form="new-task-form" rows="5" placeholder="Summary"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>From:</label>
+                    <input type="text" name="fromStreet" class="form-control" placeholder="Street">
+                    <div class="input-group">
+                        <input type="text" name="fromCity" class="form-control" placeholder="City">
+                        <input type="text" name="fromState" class="form-control" placeholder="State">
+                        <input type="text" name="fromZip" class="form-control" placeholder="Zip">
                     </div>
-                    <div class="col-8">
-                        <div><input type="text" name="fromStreet" class="form-control" placeholder="Street"></div>
-                        <div class="input-group">
-                            <input type="text" name="fromCity" class="form-control" placeholder="City">
-                            <input type="text" name="fromState" class="form-control" placeholder="State">
-                            <input type="text" name="fromZip" class="form-control" placeholder="Zip">
-                        </div>
-                        <div class="task-tags-container px-2 my-2 mt-0"></div>
+                    <div class="task-tags-container px-2 my-2 mt-0"></div>
+                </div>
+                <div class="form-group">
+                    <label>To:</label>
+                    <input type="text" name="toStreet" class="form-control" placeholder="Street">
+                    <div class="input-group">
+                        <input type="text" name="toCity" class="form-control" placeholder="City">
+                        <input type="text" name="toState" class="form-control" placeholder="State">
+                        <input type="text" name="toZip" class="form-control" placeholder="Zip">
                     </div>
                 </div>
-                <div class="row px-2 my-2 mt-0">
-                    <div class="col-4 py-2">
-                        To
-                    </div>
-                    <div class="col-8">
-                        <div><input type="text" name="toStreet" class="form-control" placeholder="Street"></div>
-                        <div class="input-group">
-                            <input type="text" name="toCity" class="form-control" placeholder="City">
-                            <input type="text" name="toState" class="form-control" placeholder="State">
-                            <input type="text" name="toZip" class="form-control" placeholder="Zip">
-                        </div>
-                        <div class="task-tags-container px-2 my-2 mt-0"></div>
+                <div class="form-group">
+                    <label>Date:</label>
+                    <div class="input-group">
+                        <input type="date" name="date" class="form-control" placeholder="Date">
+                        <input type="time" name="time" class="form-control" placeholder="Time">
                     </div>
                 </div>
-
-                <div class="row px-2 my-2 mt-0">
-                    <div class="col-4 py-2">
-                        Date
-                    </div>
-                    <div class="col-8">
-                        <div class="input-group">
-                            <input type="date" name="date" class="form-control" placeholder="Date">
-                            <input type="time" name="time" class="form-control" placeholder="Time">
-                        </div>
+                <div class="form-group">
+                    <label>Difficulty:</label>
+                    <input type="range" class="custom-range" name="difficulty" min="1" max="3" step="1">
+                    <div class="row text-muted h6">
+                        <div class="col-4 text-left">Easy</div>
+                        <div class="col-4 text-center">A Little</div>
+                        <div class="col-4 text-right">Hard</div>
                     </div>
                 </div>
-
-
-                <div class="row px-2 my-2 mt-0">
-                    <div class="col-4">
-                        Difficulty
-                    </div>
-                    <div class="col-8">
-                        <input type="range" class="custom-range" name="difficulty" min="1" max="3" step="1">
-                        <div class="row text-muted h6">
-                            <div class="col-4 text-left">Easy</div>
-                            <div class="col-4 text-center">A Little</div>
-                            <div class="col-4 text-right">Hard</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row px-2 my-2 mt-0">
-                    <div class="col-4">
-                        Special Skills
-                    </div>
-                    <div class="col-8">
+                <div class="form-group">
+                    <label>Special Skills:</label>
+                    <div>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" id="customRadioInline1" name="skillsRequired" value="1" class="custom-control-input">
                             <label class="custom-control-label" for="customRadioInline1">Required</label>
@@ -79,33 +59,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="row px-2 my-2 mt-0">
-                    <div class="col-4 py-2">
-                        Estimated Time
-                    </div>
-                    <div class="col-8">
-                        <input type="number" name="estimatedTime" class="form-control" placeholder="Number of hours">
-                    </div>
+                <div class="form-group">
+                    <label>Estimated Time:</label>
+                    <input type="number" name="estimatedTime" class="form-control" placeholder="Number of hours">
                 </div>
-                <div class="row px-2 my-2 mt-0">
-                    <div class="col-4 py-2">
-                        Pay
-                    </div>
-                    <div class="col-8">
-                        <div class="input-group">
-                            <input type="number" name="pay" class="form-control" placeholder=" $/hour ">
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label>Pay:</label>
+                    <input type="number" name="pay" class="form-control" placeholder=" $/hour ">
                 </div>
-                <input class="btn btn-primary btn px-4 mt-2" name="action" type="submit" value="Post" onclick="//return post();">
+                <input class="btn btn-primary btn px-4 mt-2" name="action" type="submit" value="Post" onclick=" //return post();">
             </form>
         </div>
 
-
-
-
         <div class="tab-pane fade" id="my-task-history">
-            <h3 class="my-2 text-center mx-auto">Tasks you had put up before</h3>
+            <h4 class="my-2 text-center mx-auto">Your previous relocation postings:</h4>
             <div id="view-my-tasks">
             </div>
         </div>
@@ -139,75 +106,75 @@
 </script>
 
 <script>
-/*    function post() {
-        var taskTags = document.getElementsByClassName("task-tags");
-        var allTags = new Set();
-        for (var i = 0; i < taskTags.length; i++)
-            allTags.add(taskTags[i].innerHTML);
+    /*    function post() {
+            var taskTags = document.getElementsByClassName("task-tags");
+            var allTags = new Set();
+            for (var i = 0; i < taskTags.length; i++)
+                allTags.add(taskTags[i].innerHTML);
 
-        var tags = JSON.stringify(Array.from(allTags));
-        console.log(tags);
-        document.getElementById("all-tags-hidden").value = tags;
+            var tags = JSON.stringify(Array.from(allTags));
+            console.log(tags);
+            document.getElementById("all-tags-hidden").value = tags;
 
-        var newTaskData = $('#new-task-form').serialize();
+            var newTaskData = $('#new-task-form').serialize();
 
-        $.ajax({
-            type: "POST",
-            url: "/add",
-            data: newTaskData,
-            success: function () {
-                console.log("posted!");
-            }
-        });
-
-        return false;
-    }
-    function addTag() {
-        var taskTags = document.getElementsByClassName("task-tags");
-        var allTags = new Set();
-        for (var i = 0; i < taskTags.length; i++)
-            allTags.add(taskTags[i].innerHTML);
-
-        var addTagInput = document.getElementById("add-tag-input");
-        allTags.add(addTagInput.value);
-        addTagInput.value = "";
-
-        var container = document.getElementsByClassName("task-tags-container")[0];
-        while (container.firstChild)
-            container.removeChild(container.firstChild);
-
-        allTags.forEach((tag) => {
-            var child = document.createElement("span");
-            child.className = "task-tags bg-info text-white rounded p-1 px-2 m-1";
-            child.addEventListener("click", function () { this.remove(); });
-            child.innerHTML = tag;
-            container.appendChild(child);
-        });
-    }
-    function fileInputChange() {
-        $("input[name='taskAttachment']").each(function () {
-            var fileName = $(this).val().split('/').pop().split('\\').pop();
-            var label = "Attachments (if available)";
-            if (fileName !== "")
-                label = fileName;
-            $(".task-attachment-label").html(label);
-        });
-    }
-
-    function getHistory() {
-        $.ajax({
-            type: "GET",
-            url: "/my_tasks?from=0&to=0",
-            success: function (response) {
-                var respObj = JSON.parse(response);
-                var elem = document.getElementsByClassName("view-tasks")[0];
-                elem.innerHTML = "";
-                for (var i = 0; i < respObj.length; i++) {
-                    elem.innerHTML += '<div class="task-object">' + JSON.stringify(respObj[i]) + "</div>";
+            $.ajax({
+                type: "POST",
+                url: "/add",
+                data: newTaskData,
+                success: function () {
+                    console.log("posted!");
                 }
-            }
-        });
-    }
-    // getHistory();
-    */
+            });
+
+            return false;
+        }
+        function addTag() {
+            var taskTags = document.getElementsByClassName("task-tags");
+            var allTags = new Set();
+            for (var i = 0; i < taskTags.length; i++)
+                allTags.add(taskTags[i].innerHTML);
+
+            var addTagInput = document.getElementById("add-tag-input");
+            allTags.add(addTagInput.value);
+            addTagInput.value = "";
+
+            var container = document.getElementsByClassName("task-tags-container")[0];
+            while (container.firstChild)
+                container.removeChild(container.firstChild);
+
+            allTags.forEach((tag) => {
+                var child = document.createElement("span");
+                child.className = "task-tags bg-info text-white rounded p-1 px-2 m-1";
+                child.addEventListener("click", function () { this.remove(); });
+                child.innerHTML = tag;
+                container.appendChild(child);
+            });
+        }
+        function fileInputChange() {
+            $("input[name='taskAttachment']").each(function () {
+                var fileName = $(this).val().split('/').pop().split('\\').pop();
+                var label = "Attachments (if available)";
+                if (fileName !== "")
+                    label = fileName;
+                $(".task-attachment-label").html(label);
+            });
+        }
+
+        function getHistory() {
+            $.ajax({
+                type: "GET",
+                url: "/my_tasks?from=0&to=0",
+                success: function (response) {
+                    var respObj = JSON.parse(response);
+                    var elem = document.getElementsByClassName("view-tasks")[0];
+                    elem.innerHTML = "";
+                    for (var i = 0; i < respObj.length; i++) {
+                        elem.innerHTML += '<div class="task-object">' + JSON.stringify(respObj[i]) + "</div>";
+                    }
+                }
+            });
+        }
+        // getHistory();
+        */
 </script>

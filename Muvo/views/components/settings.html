@@ -5,38 +5,54 @@
     </div>
     <div class="tab-content">
         <div class="tab-pane fade-in active" id="add-new">
-            <h3 class="my-2 text-center mx-auto">Lets add a new Move task!</h3>
-
+            <h3 class="my-2 text-center mx-auto">Basic Profile</h3>
+            <div>
+                <form action="/signup" method="post">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input class="form-control" name="fname" placeholder="e.g. John Doe" required="" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>Zip Code</label>
+                        <input class="form-control" name="zip" placeholder="e.g. 76013" required="" type="number">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input class="form-control" name="phone" placeholder="e.g. 123-456-7890" required="" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input class="form-control" name="email" placeholder="e.g. name@example.com" required="" type="email">
+                        <small class="form-text text-muted">Verification email will be sent here.</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input class="form-control" name="username" placeholder="e.g. username" required="" type="text">
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input class="form-control" name="pass" placeholder="Password (Ignore to use the old one)" required="" type="password">
+                    </div>
+                    <input class="btn btn-primary btn" name="action" type="submit" value="Register">
+                </form>
+            </div>
         </div>
 
-
-
+        <!--
+    <div class="form-group">
+        <label>Profile Image</label>
+        <div class="input-group">
+            <input name="profileImage" type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" accept="image/*" onchange="document.getElementById('profile-image-input-label').innerHTML = this.value.split('/').reverse()[0].split('\\').reverse()[0]">
+            <label class="custom-file-label" id="profile-image-input-label" for="inputGroupFile01">Choose an image file</label>
+        </div>
+    </div>
+        -->
 
         <div class="tab-pane fade" id="my-task-history">
             <h3 class="my-2 text-center mx-auto">Tasks you had put up before</h3>
             <div class="view-tasks">
                 <div class="tasks">
-                    <div class="view-task-post-date">
-                        Sept 29 2019
-                    </div>
-                    <div class="view-task-description">
-                        This is the desc, will pay 25 an hour
-                    </div>
-                    <div class="view-task-tags">
-                        From and To address information
-                    </div>
-                    <div class="view-task-difficulty">
-                        very little
-                    </div>
-                    <div class="view-task-skills">
-                        skills required
-                    </div>
-                    <div class="view-task-time-required">
-                        2 hours
-                    </div>
-                    <div class="view-task-attachments">
-                        attachments
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -45,22 +61,52 @@
 <div id="root"></div>
 
 
+
+<script>
+    var submitForm = function () {
+        const data = new URLSearchParams();
+        const formElement = document.getElementById("basic-profile");
+        const url = "";
+        for (const pair of new FormData(formElement)) {
+            data.append(pair[0], pair[1]);
+        }
+
+        fetch(url, {
+                method: 'post',
+                body: data,
+            })
+            .then(…);
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
 <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
 <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
-<script>
+<script type="text/babel">
     class Car extends React.Component {
-        constructor() {
-            super();
-            this.state = { color: "red" };
-        }
-        render() {
-            return <h2>I am a {this.state.color} Car!</h2>;
-        }
+    constructor() {
+    super();
+    this.state = { color: "red" };
+    }
+    render() {
+    return
+    <h2>I am a {this.state.color} Car!</h2>;
+    }
     }
 
-    ReactDOM.render(<Car />, document.getElementById('root'));
+    ReactDOM.render(
+    <Car />, document.getElementById('root'));
 
 </script>
 

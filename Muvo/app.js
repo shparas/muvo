@@ -21,9 +21,9 @@ var ejs = require('ejs');
 
 // routes import 
 var routeDir = './1.1-routes/';
-var main = require(routeDir + 'main');
-var auth = require(routeDir + 'auth');
-var tasks = require(routeDir + 'tasks');
+var main = require(routeDir + 'mainRoute');
+var auth = require(routeDir + 'authRoute');
+var tasks = require(routeDir + 'taskRoute');
 
 // controllers import
 var controllerDir = './1.2-controllers/';
@@ -82,7 +82,7 @@ app.use(
     })
 );
 
-// flash session messages00
+// flash session messages
 app.use(flash());
 
 // authentication local var

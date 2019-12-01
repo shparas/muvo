@@ -3,7 +3,7 @@
     // run1();
 }
 
-const Task = require('../2.1-models/task');
+const Task = require('../2.1-models/taskModel');
 function run1() {
     Task.find({ user: "paras@live.com" },
         function (err, data) {

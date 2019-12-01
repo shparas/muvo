@@ -30,17 +30,18 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="1.1-routes\auth.js" />
-    <Content Include="1.1-routes\main.js" />
-    <Content Include="1.1-routes\tasks.js" />
-    <Content Include="1.2-controllers\auth.js" />
-    <Content Include="1.2-controllers\tasks.js" />
+    <Content Include="1.1-routes\authRoute.js" />
+    <Content Include="1.1-routes\mainRoute.js" />
+    <Content Include="1.1-routes\taskRoute.js" />
+    <Content Include="1.2-controllers\authController.js" />
+    <Content Include="1.2-controllers\taskController.js" />
     <Content Include="1.3-middlewares\is-authorized.js" />
     <Content Include="1.3-middlewares\helpers.js">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="2.1-models\task.js" />
-    <Content Include="2.1-models\user.js" />
+    <Content Include="2.1-models\taskModel.js" />
+    <Content Include="2.1-models\userModel.js" />
+    <Content Include="2.2-data\jwt.key" />
     <Content Include="app.js" />
     <Content Include="package.json" />
     <Content Include="public\favicon.png" />

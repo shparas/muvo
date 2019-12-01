@@ -5,28 +5,28 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 
-const tasks = require('../1.2-controllers/tasks');
+const tasks = require('../1.2-controllers/taskController');
 const isAuthorized = require('../1.3-middlewares/is-authorized');
 
 router.post(
-	'/tasks', 
+	'/api/tasks', 
     isAuthorized,
     bodyParser.json(), 
 	tasks.addTask
 );
 router.put(
-    '/tasks',
+    '/api/tasks',
     isAuthorized,
     bodyParser.json(),
     tasks.updateTask
 );
 router.get(
-	'/tasks',
+	'/api/tasks',
 	isAuthorized,
 	tasks.getTasks
 );
 router.delete(
-    '/tasks',
+    '/api/tasks',
     isAuthorized,
     tasks.removeTask
 );

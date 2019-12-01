@@ -3,71 +3,26 @@ body{
 	margin:0;
 	min-height:100vh;
 	width:100%;
-	background-color: #00aaff;
 	background-attachment:fixed;
 	background-size:cover;
 	overflow-x:hidden; 
 	overflow-y:auto; 
 	background-repeat:no-repeat;
 }
-.pageheader{
-	/* background-image: url('/pageheader.jpg'); */
-	background-repeat: no-repeat;
-	background-position:center; 
-	background-attachment:fixed; 
-	background-size:cover; 
-	margin:0;
-	padding:0;
-	color:white;
-	font-size:1.2em;
-	border-bottom: black solid 3px;
+.sidebar-wrapper {
+    position: sticky;
+    top: 0;
+    overflow: hidden;
 }
-.pageheader > div{
-	padding: 15px;	
-	padding-top: 50px;
-	padding-bottom: 50px;
-}
-.sidebar-left-placeholder{
-	color:white;
-	width: 230px;
-	height: 100vh;
-	position:fixed;
-	z-index:1;
-	border-right: solid #def 1px;
-}
-.sidebar-left-placeholder .btn{
-	color:white;
-	padding: 10px 20px;
-	border-radius: 0px;
-	border: none;
-}
-.body-right-placeholder{
-	margin-left: 230px;
-}
-.form-part{
-	padding:10px;
-	background-color:rgba(230,230,230,0.9);
-	border-radius:5px;
-	color: black;
-}
-.bg-white-light{
-	background-color:rgba(230,230,230,0.9);
-	border-radius:5px;
-	color: black;
-}
-.body-footer-main-text	{
-	font-size:0.8em;
-	padding:5px;
-	color:white;
-	text-align:right;
-	position:sticky;
-	bottom:0;
-	right:0;
-}
-.task-object{
-	margin:10px 0;
-	padding: 5px;
-	border: solid #00aaff 1px;
-	border-radius: 3px;
-	overflow:hidden;
+.pageheader {
+    /* background-image: url('/pageheader.jpg'); */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-size: 1.2em;
+    border-bottom: black solid 3px;
 }

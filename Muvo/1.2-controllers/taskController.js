@@ -1,4 +1,4 @@
-const Task = require('../2.1-models/task');
+const Task = require('../2.1-models/taskModel');
 
 
 // POST /tasks with JSON body

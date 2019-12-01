@@ -1,24 +1,56 @@
-<div class="sidebar-left-placeholder">
-	<div>
-		<a href="/dash" class="btn btn-outline-primary w-100 text-left">Dash</a>
-		<a href="/add" class="btn btn-outline-primary w-100 text-left">Add Tasks</a>
-		<a href="/settings" class="btn btn-outline-primary w-100 text-left">Settings</a>
-		<a href="/signout" class="btn btn-outline-primary w-100 text-left">Sign Out</a>
-	</div>
+<div class="sidebar-wrapper">
+    <div class="sidebar-body">
+        <div class="text-center d-none d-md-block text-success pt-3">
+            <h1>Muvo</h1>
+            <hr class="bg-light" />
+        </div>
+        <div class="d-none d-md-block text-light">
+            <p class="px-1 font-weight-light">Currently logged in: <br /></p>
+            <hr class="bg-light" />
+
+        </div>
+        <nav class="navbar navbar-expand-md navbar-dark p-0">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse p-0" id="navbarNavDropdown">
+                <ul class="nav navbar-nav flex-column w-100 p-0">
+                    <li class="nav-item">
+                        <a href="/dash" class="btn btn-dark w-100 text-left py-2 rounded-0">Dash</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/add" class="btn btn-dark w-100 text-left py-2 rounded-0">Add Tasks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/settings" class="btn btn-dark w-100 text-left py-2 rounded-0">Settings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/signout" class="btn btn-dark w-100 text-left py-2 rounded-0">Sign Out</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 </div>
 
+
+
+
+
+
+
 <script>
-	var navBarDisabler = function(){
-		var path = location.pathname.substring(1).split("/",1)[0];
-		var elems = document.querySelectorAll("a[href^='/" + path + "']");
-		if (elems)
-			for (var i = 0, l = elems.length; i < l; i++) {
-				var el = elems[i];
-				el.className += " disabled";
-			}
-	};
-	var bodyOnLoad = function(){
-		navBarDisabler();
-	};
-	window.onLoad = bodyOnLoad();
+    var navBarDisabler = function () {
+        var path = location.pathname.substring(1).split("/", 1)[0];
+        var elems = document.querySelectorAll("a[href^='/" + path + "']");
+        if (elems)
+            for (var i = 0, l = elems.length; i < l; i++) {
+                var el = elems[i];
+                el.className += " active";
+            }
+    };
+    var bodyOnLoad = function () {
+        navBarDisabler();
+    };
+    window.onLoad = bodyOnLoad();
 </script>
