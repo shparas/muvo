@@ -51,12 +51,12 @@ exports.updateTask = (req, res) => {
         skillsRequired: req.body.skillsRequired,
         estimatedTime: req.body.estimatedTime,
         pay: req.body.pay,
-        timeStamp: Date.now(),
-        user: req.session._id
+        timeStamp: Date.now()
     };
-
+    console.log(id, task);
     if (id) {
-        Task.updateOne({ user: req.session.email, _id: id }, task,
+        Task.updateOne({ user: req.session._id, _id: id },
+            task,
             (error, data) => {
                 console.log(data);
                 if (data && data.nModified > 0) {
@@ -66,6 +66,9 @@ exports.updateTask = (req, res) => {
                 }
                 res.end();
             });
+    } else {
+        res.json({ "status": 404, "error": "Resource not found", "response": null });
+        res.end();
     }
 }
 

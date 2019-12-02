@@ -1,4 +1,6 @@
-﻿class Task extends React.Component {
+﻿var obj = {};
+
+class Task extends React.Component {
     constructor(props) {
         super(props);
         this.state = this.props.json;
@@ -30,10 +32,10 @@
         });
     }
     lock() {
-        var url = `/locktask?id=${this.state._id}&stat=${this.state.locked == true? "false": "true"}`;
+        var url = `/locktask?id=${this.state._id}&stat=${this.state.locked == true ? "false" : "true"}`;
 
         this.runAsync(url).then(data => {
-            console.log(data.status );
+            console.log(data.status);
             if (data.status == 200) {
                 this.setState({ locked: this.state.locked ^ 1 });
                 viewAll();
@@ -41,7 +43,23 @@
         });
     }
     edit() {
-        console.log("edited: ", this.state._id);
+        obj = this.state;
+        $("#edit-task-form textarea[name=description]").val(this.state.description);
+        $("#edit-task-form input[name=fromStreet]").val(this.state.fromStreet);
+        $("#edit-task-form input[name=fromCity]").val(this.state.fromCity);
+        $("#edit-task-form input[name=fromState]").val(this.state.fromState);
+        $("#edit-task-form input[name=fromZip]").val(this.state.fromZip);
+        $("#edit-task-form input[name=toStreet]").val(this.state.toStreet);
+        $("#edit-task-form input[name=toCity]").val(this.state.toCity);
+        $("#edit-task-form input[name=toState]").val(this.state.toState);
+        $("#edit-task-form input[name=toZip]").val(this.state.toZip);
+        $("#edit-task-form input[name=date]").val(this.state.date);
+        $("#edit-task-form input[name=time]").val(this.state.time);
+        $("#edit-task-form input[name=difficulty]").val(this.state.difficulty);
+        $("#edit-task-form input[name=skillsRequired]").val(this.state.skillsRequired);
+        $("#edit-task-form input[name=estimatedTime]").val(this.state.estimatedTime);
+        $("#edit-task-form input[name=pay]").val(this.state.pay);
+        $('#edit-task-form').attr('action', '/tasks?id=' + this.state._id);
     }
 
     render() {
@@ -81,14 +99,14 @@
                 </div>
                 <div className="card-footer bg-light">
                     <div>
-                        Favorited by: {this.state.favorites.map(item => <span key={item.username}>{item.username}, </span>)}
+                        Favorited by: {this.state.favorites.map(item => <span key={item.username}><a href={"mailto:" + item.email}>{item.username}</a>, </span>)}
                     </div>
                     <div>
-                        Requested by: {(this.state.requests) && (this.state.requests.map(item => <span key={item.username}>{item.username}, </span>))}
+                        Requested by: {(this.state.requests) && (this.state.requests.map(item => <span key={item.username}><a href={"mailto:" + item.email}>{item.username}</a>, </span>))}
                     </div>
                 </div>
                 <div className="card-footer">
-                    <button className="btn btn-warning mr-1 text-dark" onClick={this.edit}>
+                    <button className="btn btn-warning mr-1 text-dark" onClick={this.edit} data-toggle="modal" data-target="#editTask">
                         Edit
                     </button>
                     <button className="btn btn-warning ml-1" onClick={this.lock}>
@@ -116,6 +134,24 @@ var getData = async function (url = "/tasks") {
         redirect: 'follow', // manual, *follow, error
         referrer: 'no-referrer', // no-referrer, *client
         // body: JSON.stringify(data) // body data type must match "Content-Type" header
+    });
+    return await response.json(); // parses JSON response into native JavaScript objects
+}
+
+
+var editTask = async function (url = $('#edit-task-form').attr('action')) {
+    const data = new URLSearchParams();
+    for (const pair of new FormData(document.getElementById('edit-task-form'))) {
+        data.append(pair[0], pair[1]);
+    }
+    data.append("description", $("#edit-task-form textarea[name=description]").val());
+    var response = await fetch(url, {
+        method: 'put',
+        body: data,
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+
     });
     return await response.json(); // parses JSON response into native JavaScript objects
 }
