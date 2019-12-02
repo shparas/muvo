@@ -4,11 +4,6 @@
             <h1>Muvo</h1>
             <hr class="bg-light" />
         </div>
-        <div class="d-none d-md-block text-light">
-            <p class="px-1 font-weight-light">Currently logged in: <br /></p>
-            <hr class="bg-light" />
-
-        </div>
         <nav class="navbar navbar-expand-md navbar-dark p-0">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -22,7 +17,7 @@
                         <a href="/add" class="btn btn-dark w-100 text-left py-2 rounded-0">Add Tasks</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/settings" class="btn btn-dark w-100 text-left py-2 rounded-0">Settings</a>
+                        <a href="/settings" class="btn btn-dark w-100 text-left py-2 rounded-0">Profile</a>
                     </li>
                     <li class="nav-item">
                         <a href="/signout" class="btn btn-dark w-100 text-left py-2 rounded-0">Sign Out</a>
@@ -30,6 +25,17 @@
                 </ul>
             </div>
         </nav>
+        <div class="d-none d-md-block text-light">
+            <hr class="bg-light" />
+            <p class="px-1">
+                Currently logged in:
+            </p>
+            <p class="text-center">
+                <%- session.profileImgUrl !="" ? `<img class="sidebar-icon" src="/images/${session.profileImgUrl}" />` : '' %>
+            </p>
+            <p class="px-1 font-weight-light text-center"><%- `${session.username} (${session.email})` %></p>
+        </div>
+        <div class="sidebar d-none d-md-block"></div>
     </div>
 </div>
 

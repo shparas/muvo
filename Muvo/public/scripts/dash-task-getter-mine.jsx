@@ -4,6 +4,7 @@
         this.state = this.props.json;
         this.delete = this.delete.bind(this);
         this.edit = this.edit.bind(this);
+        this.lock = this.lock.bind(this);
     }
     async runAsync(url, method = "PUT", body = "") {
         var response = await fetch(url, {
@@ -28,6 +29,17 @@
             }
         });
     }
+    lock() {
+        var url = `/locktask?id=${this.state._id}&stat=${this.state.locked == true? "false": "true"}`;
+
+        this.runAsync(url).then(data => {
+            console.log(data.status );
+            if (data.status == 200) {
+                this.setState({ locked: this.state.locked ^ 1 });
+                viewAll();
+            }
+        });
+    }
     edit() {
         console.log("edited: ", this.state._id);
     }
@@ -35,12 +47,15 @@
     render() {
         return (
             <div className="tasks card mb-1">
-                <h5 className="view-task-post-user card-header">
-                    {this.state.user}
-                    <small className="view-task-post-date">
-                        &nbsp;{this.state.date}, {this.state.time}
-                    </small>
-                </h5>
+                <div className="position-relative" >
+                    <img className="card-icon" src={"/images/" + this.state.userImg} />
+                    <h5 className="card-header">
+                        {this.state.user}
+                        <small className="view-task-post-date">
+                            &nbsp;{this.state.date}, {this.state.time}
+                        </small>
+                    </h5>
+                </div>
                 <div className="card-body">
                     <div className="view-task-description">
                         Description: {this.state.description}
@@ -66,15 +81,18 @@
                 </div>
                 <div className="card-footer bg-light">
                     <div>
-                        Favorited by: {this.state.favorites.map(item => <span key={item}>{item}, </span>)}
+                        Favorited by: {this.state.favorites.map(item => <span key={item.username}>{item.username}, </span>)}
                     </div>
                     <div>
-                        Requested by: {(this.state.requests) && (this.state.requests.map(item => <span key={item}>{item}, </span>))}
-                    </div>    
+                        Requested by: {(this.state.requests) && (this.state.requests.map(item => <span key={item.username}>{item.username}, </span>))}
+                    </div>
                 </div>
                 <div className="card-footer">
                     <button className="btn btn-warning mr-1 text-dark" onClick={this.edit}>
                         Edit
+                    </button>
+                    <button className="btn btn-warning ml-1" onClick={this.lock}>
+                        {this.state.locked ? "✔ Locked" : "Lock"}
                     </button>
                     <button className="btn btn-danger ml-1" onClick={this.delete}>
                         Delete

@@ -9,26 +9,31 @@ const tasks = require('../1.2-controllers/taskController');
 const isAuthorized = require('../1.3-middlewares/is-authorized');
 
 router.post(
-	'/api/tasks', 
+	'/tasks', 
     isAuthorized,
     bodyParser.json(), 
 	tasks.addTask
 );
 router.put(
-    '/api/tasks',
+    '/tasks',
     isAuthorized,
     bodyParser.json(),
     tasks.updateTask
 );
 router.get(
-	'/api/tasks',
+	'/tasks',
 	isAuthorized,
 	tasks.getTasks
 );
 router.delete(
-    '/api/tasks',
+    '/tasks',
     isAuthorized,
     tasks.removeTask
+);
+router.put(
+    '/locktask',
+    isAuthorized,
+    tasks.lockTask
 );
 
 

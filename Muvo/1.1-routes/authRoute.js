@@ -2,28 +2,41 @@
 // Complete
 
 'use strict';
-
+const multer = require("multer");
+const path = require("path");
 const express = require('express');
 
 const authController = require('../1.2-controllers/authController');
 
 const router = express.Router();
 
+
 router.post(
-  "/api/signup",
-  authController.signup
+    "/signup",
+    authController.signup
 );
 router.post(
-  "/api/signin",
-  authController.signin
+    "/signin",
+    authController.signin
 );
 router.get(
-    "/api/settings",
-    authController.getSettings
+    '/signout',
+    authController.signout
 );
+
 router.post(
-    "/api/settings",
+    "/settings",
     authController.postSettings
 );
+router.post(
+    "/profilePic",
+    multer({
+        dest: path.join(__dirname, '..', 'public', 'images'),
+        rename: function (fieldname) {
+            return fieldname + '-' + Date.now();
+        }
+    }).single("profileImage"), authController.postImage);
+
+
 
 module.exports = router;

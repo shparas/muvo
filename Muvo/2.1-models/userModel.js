@@ -35,7 +35,7 @@ const userSchema = new Schema({
     },
     profileImgUrl: {
         type: String,
-        default: ""
+        default: "avatar"
     },
     authorizationLevel: {
         type: Number,

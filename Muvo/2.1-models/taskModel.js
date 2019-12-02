@@ -72,14 +72,25 @@ const userSchema = new Schema({
 		default: Date.now()
 	},
 	user: {
-		type: String
-	},
+        type: Schema.Types.ObjectID,
+        ref: "User"
+    },
+    locked: {
+        type: Boolean,
+        default: false
+    },
 	status: {
 		type: Number,	// 1 = created, 2 = on work, 3 = complete
 		default: 1
     },
-    favorites: [String],
-    requests: [String]
+    favorites: [{
+        type: Schema.Types.ObjectID,
+        ref: "User"
+    }],
+    requests: [{
+        type: Schema.Types.ObjectID,
+        ref: "User"
+    }]
 });
 
 

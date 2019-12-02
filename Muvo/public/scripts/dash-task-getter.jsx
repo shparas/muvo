@@ -43,12 +43,15 @@
     render() {
         return (
             <div className="tasks card mb-1">
-                <h5 className="view-task-post-user card-header">
-                    {this.state.user}
-                    <small className="view-task-post-date">
-                        &nbsp;{this.state.date}, {this.state.time}
-                    </small>
-                </h5>
+                <div className="position-relative" >
+                    <img className="card-icon" src={"/images/" + this.state.userImg} />
+                    <h5 className="card-header">
+                        {this.state.user}
+                        <small className="view-task-post-date">
+                            &nbsp;{this.state.date}, {this.state.time}
+                        </small>
+                    </h5>
+                </div>
                 <div className="card-body">
                     <div className="view-task-description">
                         Description: {this.state.description}
@@ -85,7 +88,7 @@
     }
 }
 
-var getData = async function (url ="/tasks") {
+var getData = async function (url = "/tasks") {
     const response = await fetch(url, {
         method: 'GET', // *GET, POST, PUT, DELETE, etc.
         mode: 'cors', // no-cors, *cors, same-origin

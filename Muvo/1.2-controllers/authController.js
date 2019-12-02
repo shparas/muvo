@@ -1,45 +1,34 @@
-const fs = require('fs');
-const jwt = require('jsonwebtoken');
-
 const User = require('../2.1-models/userModel');
-
-const jwtKey = fs.readFileSync('./2.2-data/jwt.key');
 
 exports.signup = (req, res) => {
     const fullName = req.body.fullName;
+    const username = req.body.username;
     const zip = req.body.zip;
     const phone = req.body.phone;
     const email = req.body.email;
-    const username = req.body.username;
     const pass = req.body.pass;
 
     const authorizationLevel = 1;
 
     const user = new User({
         fullName: fullName,
-        zip: zip,
-        phone: phone,
-        email: email,
         username: username,
+        zip: zip,
+        email: email,
+        phone: phone,
         pass: pass,
         authorizationLevel: authorizationLevel
     });
     return user.save().then(result => {
-        var token = jwt.sign({
-            fullName: fullName,
-            username: username,
-            zip: zip,
-            phone: phone,
-            email: email,
-            isAuthorized: true,
-            profileImgUrl: "",
-            time: Date.now() / 1000
-        }, jwtKey);
-        res.json({ token: token, err: "" }).end();
-    }).catch(err => {
-        res.statusCode = 400;
-        console.log(err);
-        res.json({err: err.message}).end();
+        req.session.fullName = fullName;
+        req.session.username = username;
+        req.session.zip = zip;
+        req.session.phone = phone;
+        req.session.email = email;
+        req.session.isAuthorized = true;
+        req.session.profileImgUrl = "avatar";
+
+        res.redirect('/');
     });
 };
 
@@ -47,26 +36,23 @@ exports.signin = (req, res) => {
     const usernameOrEmail = req.body.usernameOrEmail;
     const pass = req.body.pass;
     User.findOne({ $or: [{ email: usernameOrEmail }, { username: usernameOrEmail}], pass: pass })
-        .then(user => {
-            console.log(usernameOrEmail);
+        .then((user, err) => {
             if (!user) {
-                res.statusCode = 401;
-                res.json({ err: err }).end();
-            } else {
-                var token = jwt.sign({
-                    fullName: user.fullName,
-                    username: user.username,
-                    zip: user.zip,
-                    phone: user.phone,
-                    email: user.email,
-                    isAuthorized: true,
-                    profileImgUrl: user.profileImgUrl,
-                    time: Date.now() / 1000
-                }, jwtKey);
-                res.json({ token: token, err: "" }).end();
+                res.redirect('/');
             }
+            req.session._id = user._id;
+            req.session.fullName = user.fullName;
+            req.session.username = user.username;
+            req.session.zip = user.zip;
+            req.session.phone = user.phone;
+            req.session.email = user.email;
+            req.session.isAuthorized = true;
+            req.session.profileImgUrl = user.profileImgUrl;
+            
+            res.redirect('/');
         })
         .catch(err => {
+            console.log(err);
             res.statusCode = 400;
             res.json({ err: err }).end();
         });
@@ -76,39 +62,51 @@ exports.signout = (req, res, next) => {
     req.session.destroy(err => { });
     res.redirect('/');
 };
-exports.getSettings = (req, res, next) => {
-}
+
 exports.postSettings = (req, res, next) => {
-    //var user = await User.findOne({ email: req.session.email });
-    var user = {};
     const fullName = req.body.fullName;
     const username = req.body.username;
     const zip = req.body.zip;
     const phone = req.body.phone;
     const email = req.body.email;
-    const pass = req.body.pass == "" ? user.pass : req.body.pass;
+    const pass = req.body.pass;
 
-    const authorizationLevel = 1;
-
+    var user = {};
     user.fullName = fullName;
     user.username = username;
     user.zip = zip;
     user.email = email;
     user.phone = phone;
-    user.pass = pass;
-    user.authorizationLevel = authorizationLevel;
+    if (pass != "") user.pass = pass;
 
-    return user.save().then(result => {
+    User.findOneAndUpdate({ email: req.session.email }, user).then(result=>{
         req.session.fullName = fullName;
         req.session.username = username;
         req.session.zip = zip;
         req.session.phone = phone;
         req.session.email = email;
-        req.session.isAuthorized = true;
-
+        res.redirect("/");
+    }).catch((err) => {
         res.statusCode = 400;
-        res.redirect('/');
-    }).catch(err => {
+        res.redirect("/settings");
+    }); 
+}
 
+
+
+
+exports.postImage = (req, res, next) => {
+    let fileName = "avatar";
+    if (req.file && req.file.filename != "")
+        fileName = req.file.filename;
+
+    console.log(fileName)
+    User.findOneAndUpdate({ email: req.session.email }, { profileImgUrl: fileName}).then(result => {
+        req.session.profileImgUrl = fileName;
+        res.redirect("/");
+    }).catch((err) => {
+        console.log(err);
+        res.statusCode = 400;
+        res.redirect("/settings");
     });
 }

@@ -13,6 +13,10 @@ body{
     position: sticky;
     top: 0;
     overflow: hidden;
+    max-height: 100vh;
+}
+.sidebar {
+    height: 100vh;
 }
 .pageheader {
     /* background-image: url('/pageheader.jpg'); */
@@ -25,4 +29,18 @@ body{
     color: white;
     font-size: 1.2em;
     border-bottom: black solid 3px;
+}
+.card-icon {
+    height: 45px;
+    width: 45px;
+    margin: 2px;
+    border: black;
+    float: left;
+}
+.sidebar-icon {
+    height: 100px;
+    width: 100px;
+    margin: 5px;
+    border: solid whitesmoke 2px;
+    border-radius: 50% 50%;
 }

@@ -1,133 +1,64 @@
 <div>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a aria-controls="nav-home" aria-selected="true" class="nav-item nav-link active" data-toggle="tab" href="#add-new" id="nav-home-tab" role="tab">Favorites</a>
-        <a aria-controls="nav-profile" aria-selected="false" class="nav-item nav-link" data-toggle="tab" href="#my-task-history" id="nav-profile-tab" role="tab">Community</a>
+        <a aria-controls="nav-home" aria-selected="true" class="nav-item nav-link active" data-toggle="tab" href="#first" id="nav-home-tab" role="tab">General</a>
+        <a aria-controls="nav-profile" aria-selected="false" class="nav-item nav-link" data-toggle="tab" href="#second" id="nav-profile-tab" role="tab">Image</a>
     </div>
     <div class="tab-content">
-        <div class="tab-pane fade-in active" id="add-new">
-            <h3 class="my-2 text-center mx-auto">Basic Profile</h3>
+        <div class="tab-pane fade-in active" id="first">
+            <h3 class="my-2 text-center mx-auto">Change your basic profile</h3>
             <div>
-                <form action="/signup" method="post">
+                <form action="/settings" method="post">
                     <div class="form-group">
-                        <label>Full Name</label>
-                        <input class="form-control" name="fname" placeholder="e.g. John Doe" required="" type="text">
+                        <label>Full Name:</label>
+                        <input class="form-control" name="fullName" placeholder="e.g. John Doe" required="" type="text" value="<%- session.fullName %>">
                     </div>
                     <div class="form-group">
-                        <label>Zip Code</label>
-                        <input class="form-control" name="zip" placeholder="e.g. 76013" required="" type="number">
+                        <label>Zip Code:</label>
+                        <input class="form-control" name="zip" placeholder="e.g. 76013" required="" type="number" value="<%- session.zip %>">
                     </div>
                     <div class="form-group">
-                        <label>Phone Number</label>
-                        <input class="form-control" name="phone" placeholder="e.g. 123-456-7890" required="" type="text">
+                        <label>Phone Number:</label>
+                        <input class="form-control" name="phone" placeholder="e.g. 123-456-7890" required="" type="text" value="<%- session.phone %>">
                     </div>
                     <div class="form-group">
-                        <label>Email</label>
-                        <input class="form-control" name="email" placeholder="e.g. name@example.com" required="" type="email">
+                        <label>Email:</label>
+                        <input class="form-control" name="email" placeholder="e.g. name@example.com" required="" type="email" value="<%- session.email %>">
                         <small class="form-text text-muted">Verification email will be sent here.</small>
                     </div>
                     <div class="form-group">
-                        <label>Username</label>
-                        <input class="form-control" name="username" placeholder="e.g. username" required="" type="text">
+                        <label>Username:</label>
+                        <input class="form-control" name="username" placeholder="e.g. username" required="" type="text" value="<%- session.username %>">
                     </div>
                     <div class="form-group">
-                        <label>Password</label>
-                        <input class="form-control" name="pass" placeholder="Password (Ignore to use the old one)" required="" type="password">
+                        <label>Password:</label>
+                        <input class="form-control" name="pass" placeholder="Password (Ignore to use the old one)" type="password">
                     </div>
-                    <input class="btn btn-primary btn" name="action" type="submit" value="Register">
+                    <a href="/" class="btn btn-danger btn">Cancel</a>
+                    <input class="btn btn-primary btn" name="action" type="submit" value="Save">
                 </form>
             </div>
         </div>
 
-        <!--
-    <div class="form-group">
-        <label>Profile Image</label>
-        <div class="input-group">
-            <input name="profileImage" type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" accept="image/*" onchange="document.getElementById('profile-image-input-label').innerHTML = this.value.split('/').reverse()[0].split('\\').reverse()[0]">
-            <label class="custom-file-label" id="profile-image-input-label" for="inputGroupFile01">Choose an image file</label>
-        </div>
-    </div>
-        -->
-
-        <div class="tab-pane fade" id="my-task-history">
-            <h3 class="my-2 text-center mx-auto">Tasks you had put up before</h3>
+        <div class="tab-pane fade" id="second">
+            <h3 class="my-2 text-center mx-auto">Change your profile image</h3>
             <div class="view-tasks">
                 <div class="tasks">
-                    
+                    <form action="/profilePic" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label>Profile Image:</label>
+                            <div class="input-group">
+                                <input name="profileImage" type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" accept="image/*" onchange="document.getElementById('profile-image-input-label').innerHTML = this.value.split('/').reverse()[0].split('\\').reverse()[0]">
+                                <label class="custom-file-label" id="profile-image-input-label" for="inputGroupFile01">Choose an image file</label>
+                                <small class="form-text text-muted">An image of equal sides that are less than 500px recommended.</small>
+
+
+                            </div>
+                        </div>
+                        <a href="/" class="btn btn-danger btn">Cancel</a>
+                        <input class="btn btn-primary btn" name="action" type="submit" value="Save">
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div id="root"></div>
-
-
-
-<script>
-    var submitForm = function () {
-        const data = new URLSearchParams();
-        const formElement = document.getElementById("basic-profile");
-        const url = "";
-        for (const pair of new FormData(formElement)) {
-            data.append(pair[0], pair[1]);
-        }
-
-        fetch(url, {
-                method: 'post',
-                body: data,
-            })
-            .then(…);
-    }
-</script>
-
-
-
-
-
-
-
-
-
-
-
-<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-
-<script type="text/babel">
-    class Car extends React.Component {
-    constructor() {
-    super();
-    this.state = { color: "red" };
-    }
-    render() {
-    return
-    <h2>I am a {this.state.color} Car!</h2>;
-    }
-    }
-
-    ReactDOM.render(
-    <Car />, document.getElementById('root'));
-
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-
-</script>

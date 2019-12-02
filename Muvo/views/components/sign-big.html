@@ -4,7 +4,7 @@
     </div>
     <div class="tab-content">
         <div class="tab-pane fade-in active" id="register">
-            <h3 class="my-2 text-center mx-auto">Lets set you up an account!</h3>
+            <h3 class="my-2 text-center mx-auto">Lets set you up with an account!</h3>
             <form action="/signup" method="post" id="postSignup">
                 <div class="text-danger" id="signupError"></div>
                 <input class="form-control px-2 my-2 mt-0" name="fullName" placeholder="Full Name" required="" type="text">
@@ -13,21 +13,24 @@
                 <input class="form-control px-2 my-2 mt-0" name="email" placeholder="Email" required="" type="email">
                 <input class="form-control px-2 my-2 mt-0" name="username" placeholder="Username" required="" type="text">
                 <input class="form-control px-2 my-2" name="pass" placeholder="Password" required="" type="password">
-                <input class="btn btn-primary btn px-4 my-2 mb-0" name="action" type="submit" value="Register" onclick="submitSignupForm();return false;">
+                <input class="btn btn-primary btn px-4 my-2 mb-0" name="action" type="submit" value="Register">
             </form>
         </div>
         <div class="tab-pane fade" id="login">
             <h3 class="my-2 text-center mx-auto">Lets get you signed in!</h3>
             <form action="/signin" method="post" id="postSignin">
-                <input class="form-control px-2 my-2 mt-0" name="usernameOrEmail" placeholder="Username or Email" required="" type="email"> <input class="form-control px-2 my-2" name="pass" placeholder="Password" required="" type="password">
+                <input class="form-control px-2 my-2 mt-0" name="usernameOrEmail" placeholder="Username or Email" required="" type="text"> <input class="form-control px-2 my-2" name="pass" placeholder="Password" required="" type="password">
                 <div class="text-danger" id="signinError"></div>
                 <div class="checkbox px-2 my-2">
                     <label><input name="remember" type="checkbox" value="1"> Remember</label>
-                </div><input class="btn btn-primary btn px-4 my-2 mb-0" name="action" type="submit" value="Sign In" onclick="submitSigninForm(); return false;">
+                </div><input class="btn btn-primary btn px-4 my-2 mb-0" name="action" type="submit" value="Sign In">
             </form>
         </div>
     </div>
 </div>
+
+<!--
+
 <script>
     var submitSigninForm = function() {
         const data = new URLSearchParams();
@@ -78,3 +81,5 @@
             });
     }
 </script>
+
+-->
